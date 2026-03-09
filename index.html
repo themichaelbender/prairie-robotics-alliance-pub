@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prairie Robotics Alliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #002B5C;
+    --navy-deep: #001a3a;
+    --red: #ED1C24;
+    --red-hover: #d41920;
+    --white: #FFFFFF;
+    --light-gray: #F4F5F7;
+    --mid-gray: #8A919E;
+    --dark-gray: #2C3E50;
+    --accent-gold: #F5A623;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--dark-gray);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-placeholder {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .logo-text span {
+    color: var(--red);
+  }
+
+  /* ── TAB NAV ── */
+  nav {
+    display: flex;
+    gap: 0;
+  }
+
+  nav button {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    padding: 22px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  nav button:hover {
+    color: var(--white);
+  }
+
+  nav button.active {
+    color: var(--white);
+  }
+
+  nav button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 3px;
+    background: var(--red);
+    border-radius: 3px 3px 0 0;
+    animation: slideIn 0.25s ease;
+  }
+
+  @keyframes slideIn {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* ── TAB CONTENT ── */
+  .tab-content {
+    display: none;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(237,28,36,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+  }
+
+  .hero-text { flex: 1; }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    background: rgba(245,166,35,0.12);
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.08;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .hero p {
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.72);
+    max-width: 520px;
+    margin-bottom: 32px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-red {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .btn-red:hover {
+    background: var(--red-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(237,28,36,0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--white);
+    transform: translateY(-1px);
+  }
+
+  .hero-image-placeholder {
+    width: 340px;
+    height: 320px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.06);
+    border: 2px dashed rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 14px;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .hero-image-placeholder svg {
+    opacity: 0.3;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--white);
+    border-bottom: 1px solid #E8EAED;
+    padding: 32px 24px;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .section-header p {
+    font-size: 17px;
+    color: var(--mid-gray);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .section-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--red);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--dark-gray);
+    margin-bottom: 18px;
+  }
+
+  .about-text strong {
+    color: var(--navy);
+  }
+
+  .about-card {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 36px;
+    border-left: 4px solid var(--red);
+  }
+
+  .about-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  .about-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .about-card ul li {
+    padding: 8px 0;
+    font-size: 15px;
+    color: var(--dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .about-card ul li::before {
+    content: '→';
+    color: var(--red);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .first-logo-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(0,43,92,0.04);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.6;
+  }
+
+  .first-logo-note a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .first-logo-note a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── TEAM ── */
+  .team-intro {
+    text-align: center;
+    max-width: 660px;
+    margin: 0 auto 48px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--dark-gray);
+  }
+
+  .team-group {
+    margin-bottom: 48px;
+  }
+
+  .team-group-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E8EAED;
+  }
+
+  .team-group-header h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy);
+  }
+
+  .team-group-badge {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  .team-group-badge.red { background: var(--red); }
+
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .member-card {
+    background: var(--light-gray);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .member-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .member-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid #E8EAED;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--navy);
+  }
+
+  .member-card.mentor .member-avatar { border-color: var(--red); color: var(--red); }
+  .member-card.board .member-avatar { border-color: var(--navy); background: var(--navy); color: var(--white); }
+
+  .member-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .member-role {
+    font-size: 12px;
+    color: var(--mid-gray);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .join-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .join-card {
+    border: 2px solid #E8EAED;
+    border-radius: 14px;
+    padding: 32px 28px;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .join-card:hover {
+    border-color: var(--navy);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,43,92,0.08);
+  }
+
+  .join-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 24px;
+  }
+
+  .join-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .join-card p {
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .btn-join {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid var(--navy);
+    color: var(--navy);
+    background: transparent;
+  }
+
+  .btn-join:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  @media (max-width: 768px) {
+    .join-cards { grid-template-columns: 1fr; }
+    .member-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  }
+
+  /* ── SPONSORSHIP ── */
+  .sponsor-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 48px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--dark-gray);
+  }
+
+  .donate-box {
+    max-width: 560px;
+    margin: 0 auto 56px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius: 16px;
+    padding: 44px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .donate-box::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(237,28,36,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .donate-box h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .donate-box p {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .donate-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-donate {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-paypal {
+    background: #0070BA;
+    color: var(--white);
+  }
+
+  .btn-paypal:hover {
+    background: #005ea6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,112,186,0.4);
+  }
+
+  .btn-venmo {
+    background: #008CFF;
+    color: var(--white);
+  }
+
+  .btn-venmo:hover {
+    background: #007ae6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,140,255,0.4);
+  }
+
+  .donate-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    position: relative;
+  }
+
+  .funds-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+
+  .fund-card {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+  }
+
+  .fund-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .fund-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    border: 1px solid #E8EAED;
+  }
+
+  .fund-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .fund-card p {
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.55;
+  }
+
+  .vision-box {
+    background: var(--white);
+    border: 2px solid var(--red);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .vision-text { flex: 1; }
+
+  .vision-text h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .vision-text h3 span {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    background: rgba(237,28,36,0.08);
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  .vision-text p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--dark-gray);
+    margin-bottom: 12px;
+  }
+
+  .vision-features {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .vision-features li {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--light-gray);
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+
+  .vision-placeholder {
+    width: 220px;
+    height: 180px;
+    border-radius: 12px;
+    background: var(--light-gray);
+    border: 2px dashed #D0D3D9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--mid-gray);
+    font-size: 13px;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .funds-grid { grid-template-columns: 1fr; }
+    .vision-box { flex-direction: column; }
+    .vision-placeholder { width: 100%; }
+    .donate-box { padding: 32px 24px; }
+  }
+
+  /* ── OUR SPONSORS ── */
+  .sponsors-thankyou {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+
+  .sponsors-thankyou p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--dark-gray);
+    margin-bottom: 14px;
+  }
+
+  .sponsors-thankyou .highlight {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .logo-card {
+    background: var(--white);
+    border: 2px solid #E8EAED;
+    border-radius: 12px;
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    transition: all 0.25s;
+  }
+
+  .logo-card:hover {
+    border-color: var(--navy);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,43,92,0.08);
+  }
+
+  .logo-card img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+  }
+
+  .logo-placeholder-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--mid-gray);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .logo-placeholder-item .placeholder-box {
+    width: 120px;
+    height: 60px;
+    border-radius: 8px;
+    background: var(--light-gray);
+    border: 2px dashed #D0D3D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsors-become {
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius: 16px;
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sponsors-become::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(237,28,36,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .sponsors-become h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .sponsors-become p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .contact-info h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  .contact-info p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--dark-gray);
+    margin-bottom: 28px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #E8EAED;
+  }
+
+  .contact-item:last-child { border-bottom: none; }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--navy);
+  }
+
+  .contact-item-text {
+    font-size: 15px;
+    color: var(--dark-gray);
+  }
+
+  .contact-item-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--mid-gray);
+    margin-bottom: 2px;
+  }
+
+  .contact-item a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-item a:hover {
+    color: var(--red);
+  }
+
+  .contact-form {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .contact-form h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    border: 2px solid #DDE0E5;
+    border-radius: 8px;
+    background: var(--white);
+    transition: border-color 0.2s;
+    color: var(--dark-gray);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--navy);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  footer strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; height: auto; padding: 12px 16px; gap: 0; }
+    nav { width: 100%; justify-content: center; }
+    nav button { padding: 14px 12px; font-size: 12px; letter-spacing: 0.8px; }
+    .hero h1 { font-size: 36px; }
+    .hero-inner { flex-direction: column; padding: 48px 24px; gap: 32px; }
+    .hero-image-placeholder { width: 100%; height: 200px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .stats-inner { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-placeholder">PRA</div>
+      <div class="logo-text">Prairie <span>Robotics</span> Alliance</div>
+    </div>
+    <nav>
+      <button class="active" onclick="switchTab('home')">Home</button>
+      <button onclick="switchTab('about')">About</button>
+      <button onclick="switchTab('team')">Team</button>
+      <button onclick="switchTab('sponsorship')">Sponsor</button>
+      <button onclick="switchTab('sponsors')">Our Sponsors</button>
+      <button onclick="switchTab('contact')">Contact</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════ HOME TAB ═══════════ -->
+<div id="tab-home" class="tab-content active">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">Sun Prairie, Wisconsin &bull; FRC Team 10522</div>
+        <h1>Building Robots.<br>Building <em>Futures.</em></h1>
+        <p>Prairie Robotics Alliance is a 501(c)(3) nonprofit empowering the next generation of engineers, makers, and problem-solvers through FIRST Robotics Competition.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-red" href="#" onclick="switchTab('sponsorship'); return false;">Become a Sponsor</a>
+          <a class="btn btn-outline" href="#" onclick="switchTab('about'); return false;">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Team Photo<br>Placeholder
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-number">10522</div>
+        <div class="stat-label">FRC Team Number</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2026</div>
+        <div class="stat-label">Competition Season</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">501(c)(3)</div>
+        <div class="stat-label">Tax-Exempt Nonprofit</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">STEM</div>
+        <div class="stat-label">Education Mission</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT TAB ═══════════ -->
+<div id="tab-about" class="tab-content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-divider"></div>
+      <h2>About Our Alliance</h2>
+      <p>Supporting FIRST Robotics teams in the Sun Prairie area through community-powered STEM education.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>Prairie Robotics Alliance, Inc.</strong> is a Wisconsin 501(c)(3) nonprofit booster organization dedicated to advancing STEM education through the FIRST Robotics Competition (FRC) program.</p>
+        <p>We support FRC Team 10522, providing students with hands-on experience in engineering, programming, project management, and teamwork — skills that translate directly into high-demand careers in technology and manufacturing.</p>
+        <p>Our team operates out of <strong>Prairie Phoenix Academy</strong> in <strong>Sun Prairie, Wisconsin</strong>. We are currently seeking to expand our facilities into a full-scale prototype fabrication lab with state-of-the-art equipment including CNC machining, 3D printing, and laser cutting.</p>
+
+        <div class="first-logo-note">
+          <em>FIRST</em>&reg; (For Inspiration and Recognition of Science and Technology) is a global robotics community that prepares young people for the future. Learn more at <a href="https://www.firstinspires.org" target="_blank" rel="noopener">firstinspires.org</a>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <h3>What Students Gain</h3>
+        <ul>
+          <li>Mechanical & electrical engineering fundamentals</li>
+          <li>CAD/CAM design and CNC fabrication</li>
+          <li>Programming and autonomous systems</li>
+          <li>Project management and teamwork</li>
+          <li>Public speaking and fundraising</li>
+          <li>Direct connections to local industry</li>
+          <li>Scholarship and career opportunities</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TEAM TAB ═══════════ -->
+<div id="tab-team" class="tab-content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-divider"></div>
+      <h2>Meet Team 10522</h2>
+      <p>The students, mentors, and board members who make it all happen.</p>
+    </div>
+
+    <p class="team-intro">
+      FRC Team 10522 — "Team Scrappy" — is a community of students, mentors, and supporters in Sun Prairie, Wisconsin, united by a passion for robotics, engineering, and making things work. Together we design, build, and compete.
+    </p>
+
+    <!-- STUDENTS -->
+    <div class="team-group">
+      <div class="team-group-header">
+        <h3>Students</h3>
+        <div class="team-group-badge red">2025–26 Season</div>
+      </div>
+      <div class="member-grid">
+        <!-- Replace placeholder names with real student names -->
+        <div class="member-card">
+          <div class="member-avatar">AB</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">CD</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">EF</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">GH</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">IJ</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">KL</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">MN</div>
+          <div class="member-name">Student Name</div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">OP</div>
+          <div class="member-name">Student Name</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENTORS -->
+    <div class="team-group">
+      <div class="team-group-header">
+        <h3>Mentors</h3>
+        <div class="team-group-badge">Volunteers</div>
+      </div>
+      <div class="member-grid">
+        <!-- Replace placeholder names with real mentor names -->
+        <div class="member-card mentor">
+          <div class="member-avatar">JD</div>
+          <div class="member-name">Mentor Name</div>
+          <div class="member-role">Lead Mentor</div>
+        </div>
+        <div class="member-card mentor">
+          <div class="member-avatar">SM</div>
+          <div class="member-name">Mentor Name</div>
+          <div class="member-role">Mechanical</div>
+        </div>
+        <div class="member-card mentor">
+          <div class="member-avatar">RK</div>
+          <div class="member-name">Mentor Name</div>
+          <div class="member-role">Programming</div>
+        </div>
+        <div class="member-card mentor">
+          <div class="member-avatar">LP</div>
+          <div class="member-name">Mentor Name</div>
+          <div class="member-role">Electrical</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOARD OF DIRECTORS -->
+    <div class="team-group">
+      <div class="team-group-header">
+        <h3>Board of Directors</h3>
+        <div class="team-group-badge">Prairie Robotics Alliance</div>
+      </div>
+      <div class="member-grid">
+        <div class="member-card board">
+          <div class="member-avatar">CM</div>
+          <div class="member-name">Curt Mould</div>
+          <div class="member-role">President</div>
+        </div>
+        <div class="member-card board">
+          <div class="member-avatar">MB</div>
+          <div class="member-name">Michael Bender</div>
+          <div class="member-role">Treasurer</div>
+        </div>
+        <div class="member-card board">
+          <div class="member-avatar">KS</div>
+          <div class="member-name">Kristina Shatley</div>
+          <div class="member-role">Secretary</div>
+        </div>
+        <div class="member-card board">
+          <div class="member-avatar">BR</div>
+          <div class="member-name">Briana Ruiz</div>
+          <div class="member-role">Member at Large</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOIN / VOLUNTEER CTAs -->
+    <div class="join-cards">
+      <div class="join-card">
+        <div class="join-card-icon">🤖</div>
+        <h4>Join Team 10522</h4>
+        <p>High school students in the Sun Prairie area — no experience needed. We'll teach you everything from CAD to code to competition strategy.</p>
+        <!-- Replace # with actual link when ready -->
+        <a class="btn-join" href="#">Learn More &rarr;</a>
+      </div>
+      <div class="join-card">
+        <div class="join-card-icon">🛠️</div>
+        <h4>Volunteer as a Mentor</h4>
+        <p>Share your skills in engineering, programming, business, or project management. Make a direct impact on the next generation of makers.</p>
+        <!-- Replace # with actual link when ready -->
+        <a class="btn-join" href="#">Get Involved &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ SPONSORSHIP TAB ═══════════ -->
+<div id="tab-sponsorship" class="tab-content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-divider"></div>
+      <h2>Sponsor Our Team</h2>
+      <p>Your investment powers real workforce development — connecting students to careers in engineering, technology, and manufacturing.</p>
+    </div>
+
+    <p class="sponsor-intro">
+      Prairie Robotics Alliance is a 501(c)(3) nonprofit — all contributions are tax-deductible to the extent allowed by law. Every dollar goes directly toward giving students hands-on experience in engineering, manufacturing, and technology.
+    </p>
+
+    <!-- DONATE BOX -->
+    <div class="donate-box">
+      <h3>Support Our Team</h3>
+      <p>Your contribution — of any size — helps students build real skills and compete at the highest level. Thank you for investing in the next generation.</p>
+      <div class="donate-buttons">
+        <!-- Replace # with your actual PayPal.me or donate link -->
+        <a class="btn-donate btn-paypal" href="#" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H9.603c-.564 0-1.04.413-1.127.973L7.076 21.337z"/></svg>
+          PayPal
+        </a>
+        <!-- Replace # with your actual Venmo link -->
+        <a class="btn-donate btn-venmo" href="#" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.396 2.403c.717 1.183 1.038 2.401 1.038 3.94 0 4.908-4.19 11.292-7.588 15.757H6.49L3.604.903l6.036-.572 1.603 12.855c1.49-2.438 3.331-6.27 3.331-8.893 0-1.468-.253-2.473-.68-3.296l6.502-1.594z"/></svg>
+          Venmo
+        </a>
+      </div>
+      <div class="donate-note">Tax ID (EIN) provided upon request &bull; Written acknowledgment for donations of $250+</div>
+    </div>
+
+    <!-- WHERE FUNDS GO -->
+    <div class="section-header" style="margin-bottom:32px;">
+      <div class="section-divider"></div>
+      <h2 style="font-size:28px;">Where Your Dollars Go</h2>
+    </div>
+
+    <div class="funds-grid">
+      <div class="fund-card">
+        <div class="fund-icon">🤖</div>
+        <div>
+          <h4>Robot Build &amp; Parts</h4>
+          <p>Motors, sensors, metal stock, fasteners, and control systems needed to design and build a competitive robot each season.</p>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fund-icon">🎟️</div>
+        <div>
+          <h4>Registration &amp; Competition</h4>
+          <p>FIRST team registration, event entry fees, and field element kits required to participate in FRC each year.</p>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fund-icon">🔧</div>
+        <div>
+          <h4>Tools &amp; Equipment</h4>
+          <p>Shop tools, safety gear, 3D printer filament, CNC consumables, and other materials that keep the lab running.</p>
+        </div>
+      </div>
+      <div class="fund-card">
+        <div class="fund-icon">🚌</div>
+        <div>
+          <h4>Travel &amp; Outreach</h4>
+          <p>Transportation to competitions, community STEM demos, and outreach events that share robotics with the wider community.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAB LAB VISION -->
+    <div class="vision-box">
+      <div class="vision-text">
+        <h3>The Future: Fabrication Lab <span>Coming Soon</span></h3>
+        <p>We're building a state-of-the-art fabrication and prototyping lab — a permanent, professional-grade workspace where students learn real manufacturing skills used in industry every day.</p>
+        <p>This dedicated space will serve as a workforce pipeline, giving students direct experience with the tools and processes used by local employers in engineering and manufacturing.</p>
+        <ul class="vision-features">
+          <li>CNC Machining</li>
+          <li>Laser Cutting</li>
+          <li>3D Printing</li>
+          <li>CAD/CAM Workstations</li>
+          <li>Electronics Lab</li>
+          <li>Safety Training</li>
+        </ul>
+      </div>
+      <div class="vision-placeholder">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Lab Rendering<br>Placeholder
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ OUR SPONSORS TAB ═══════════ -->
+<div id="tab-sponsors" class="tab-content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-divider"></div>
+      <h2>Our Sponsors</h2>
+      <p>The generous organizations and individuals who make our mission possible.</p>
+    </div>
+
+    <div class="sponsors-thankyou">
+      <p>Prairie Robotics Alliance extends our <span class="highlight">heartfelt gratitude</span> to every sponsor who invests in our students and our mission. Your support directly funds hands-on STEM education — giving young people in our community real-world skills in engineering, manufacturing, and technology.</p>
+      <p>Because of you, students build robots, compete at the highest level, and discover careers they never imagined. <span class="highlight">Thank you for believing in the next generation.</span></p>
+    </div>
+
+    <!-- SPONSOR LOGOS — Replace placeholders with actual <img> tags -->
+    <div class="logo-grid">
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+      <div class="logo-card">
+        <div class="logo-placeholder-item">
+          <div class="placeholder-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C0C4CC" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          Sponsor Logo
+        </div>
+      </div>
+    </div>
+    <!-- To add a real logo, replace a placeholder block with:
+         <div class="logo-card">
+           <img src="images/sponsor-name.png" alt="Sponsor Name">
+         </div>
+    -->
+
+    <div class="sponsors-become">
+      <h3>Join These Community Leaders</h3>
+      <p>Interested in having your organization represented here? We'd love to partner with you.</p>
+      <a class="btn btn-red" href="#" onclick="switchTab('sponsorship'); return false;" style="position:relative;">Become a Sponsor</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT TAB ═══════════ -->
+<div id="tab-contact" class="tab-content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-divider"></div>
+      <h2>Get in Touch</h2>
+      <p>Interested in sponsoring, volunteering, or learning more? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>Prairie Robotics Alliance is a volunteer-run organization. We welcome inquiries from potential sponsors, community partners, families, and anyone interested in supporting STEM education.</p>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-text"><a href="mailto:info@prairierobotics.org">info@prairierobotics.org</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-text">Sun Prairie, Wisconsin</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Season</div>
+            <div class="contact-item-text">Build Season: January – March<br>Competition: March – April</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select>
+            <option>Sponsorship opportunities</option>
+            <option>Volunteering / Mentoring</option>
+            <option>Joining the team (student)</option>
+            <option>General information</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us how you'd like to get involved..."></textarea>
+        </div>
+        <button class="btn btn-red" style="width:100%;" onclick="alert('Note: Form submission requires a backend service (e.g., Formspree, Netlify Forms, or a custom endpoint). Connect this form to your preferred service.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Prairie Robotics Alliance, Inc.</strong><br>
+  A 501(c)(3) nonprofit organization &bull; Sun Prairie, Wisconsin<br>
+  Supporting FIRST&reg; Robotics Competition Team 10522<br><br>
+  <span style="font-size:12px;">
+    <em>FIRST</em>&reg; is a registered trademark of For Inspiration and Recognition of Science and Technology.<br>
+    &copy; 2025 Prairie Robotics Alliance, Inc. All rights reserved.
+  </span>
+</footer>
+
+<script>
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabName).classList.add('active');
+    var labels = { home: 'Home', about: 'About', team: 'Team', sponsorship: 'Sponsor', sponsors: 'Our Sponsors', contact: 'Contact' };
+    document.querySelectorAll('nav button').forEach(function(b) {
+      if (b.textContent === labels[tabName]) b.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
