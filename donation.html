@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate to Prairie Robotics Alliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #002B5C;
+    --navy-deep: #001a3a;
+    --red: #ED1C24;
+    --red-hover: #d41920;
+    --white: #FFFFFF;
+    --light-gray: #F4F5F7;
+    --mid-gray: #8A919E;
+    --dark-gray: #2C3E50;
+    --accent-gold: #F5A623;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--dark-gray);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .donation-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--white);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .donation-hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .donation-hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .donation-hero p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+
+  .donation-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .donation-form-container h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .donation-form-container p {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .donation-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .donation-hero p {
+      font-size: 1.1rem;
+    }
+
+    .donation-form-container {
+      padding: 20px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <section class="donation-hero">
+    <h1>Support Our <em>Students</em></h1>
+    <p>Your donation directly funds competition registrations, raw materials, tools, safety gear, and travel. Every amount makes a difference in building the next generation of engineers and innovators.</p>
+  </section>
+
+  <div class="donation-form-container">
+    <h2>Make a Donation</h2>
+    <p>Complete your donation securely through our partner Zeffy. All donations are tax-deductible and go directly to supporting Prairie Robotics Alliance students.</p>
+
+    <div style="position:relative;overflow:hidden;width:100%;padding-top:120px;margin-bottom:32px;">
+      <iframe title='Donation form powered by Zeffy' style='position: absolute; border: 0; top:0;left:0;bottom:0;right:0;width:100%;height:120px' src='https://www.zeffy.com/embed/thermometer/build-the-future-3'  allowTransparency="true"></iframe>
+    </div>
+
+    <div style="position:relative;overflow:hidden;height:450px;width:100%;">
+      <iframe title='Donation form powered by Zeffy' style='position: absolute; border: 0; top:0;left:0;bottom:0;right:0;width:100%;height:100%' src='https://www.zeffy.com/embed/donation-form/build-the-future-3' allowpaymentrequest allowTransparency="true"></iframe>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="index.html" class="back-link">&larr; Back to Home</a>
+    </div>
+  </div>
+
+</body>
+</html>
