@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build the Future — Prairie Robotics Alliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #002B5C;
+    --navy-deep:  #001a3a;
+    --red:        #ED1C24;
+    --white:      #FFFFFF;
+    --light-gray: #F4F5F7;
+    --mid-gray:   #8A919E;
+    --dark-gray:  #2C3E50;
+    --gold:       #F5A623;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #888;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+
+  /* ── PAGE SHELL ─────────────────────────────────────────── */
+  .page {
+    width:  816px;   /* 8.5" × 96 dpi */
+    height: 1056px;  /* 11"  × 96 dpi */
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── CORNER MARKS ───────────────────────────────────────── */
+  .page::before,
+  .page::after {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 18px; height: 18px;
+    border-top: 2px solid rgba(255,255,255,0.25);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .page::after {
+    top: auto; left: auto;
+    bottom: 10px; right: 10px;
+    border-top: none; border-left: none;
+    border-bottom: 2px solid rgba(255,255,255,0.25);
+    border-right: 2px solid rgba(255,255,255,0.25);
+  }
+
+  /* ── HERO HEADLINE ──────────────────────────────────────── */
+  .hero-headline {
+    padding: 18px 28px 0;
+    line-height: 1;
+  }
+
+  .hero-headline .line1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 84px;
+    color: var(--white);
+    letter-spacing: -1px;
+    display: block;
+  }
+
+  .hero-headline .line2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 100px;
+    color: var(--red);
+    letter-spacing: -2px;
+    display: block;
+    margin-top: -8px;
+    text-shadow: 0 0 60px rgba(237,28,36,0.35);
+  }
+
+  .hero-headline .tagline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ── BODY COLUMNS ───────────────────────────────────────── */
+  .body-columns {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 210px 1fr 180px;
+    gap: 0;
+    padding: 14px 0 0;
+    min-height: 0;
+  }
+
+  /* ── LEFT COLUMN ────────────────────────────────────────── */
+  .col-left {
+    padding: 0 14px 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .team-photo-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+    position: relative;
+  }
+
+  .team-photo-card img {
+    width: 100%;
+    height: 148px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .team-photo-label {
+    background: rgba(0,0,0,0.72);
+    padding: 6px 10px;
+  }
+
+  .team-photo-label .team-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .team-photo-label .team-desc {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+
+  .about-block {
+    flex: 1;
+  }
+
+  .about-block .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .about-block .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .about-block p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 8px;
+  }
+
+  .about-block p strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .pipeline-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 8px 10px;
+    margin-top: 2px;
+  }
+
+  .pipeline-box p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 0;
+  }
+
+  .pipeline-box p a,
+  .pipeline-box p strong {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ── CENTER COLUMN ──────────────────────────────────────── */
+  .col-center {
+    padding: 0 12px 14px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .pillar-header {
+    background: var(--navy-deep);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .pillar-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .pillar-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .pillar-body {
+    padding: 10px 14px 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pillar-lead {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--dark-gray);
+    font-weight: 400;
+  }
+
+  .pillar-lead strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--light-gray);
+    color: var(--navy);
+    padding: 3px 7px;
+    border-radius: 3px;
+  }
+
+  .tag.red { background: rgba(237,28,36,0.1); color: var(--red); }
+  .tag.gold { background: rgba(245,166,35,0.12); color: #b07a10; }
+
+  /* ── RIGHT SIDEBAR ──────────────────────────────────────── */
+  .col-right {
+    background: var(--red);
+    padding: 14px 14px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sidebar-eyebrow::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+  }
+
+  .sidebar-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  .sidebar-section-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-section-heading {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-item {
+    margin-bottom: 8px;
+  }
+
+  .sidebar-item-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+  }
+
+  .sidebar-item-label::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 1px;
+    flex-shrink: 0;
+    transform: rotate(45deg);
+  }
+
+  .sidebar-item-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    padding-left: 12px;
+  }
+
+  .sidebar-spacer { flex: 1; }
+
+  .qr-block {
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .qr-block img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto 6px;
+  }
+
+  .qr-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    line-height: 1.3;
+  }
+
+  .qr-sub {
+    font-size: 9px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* ── FOOTER STRIP ───────────────────────────────────────── */
+  .footer-strip {
+    background: var(--navy-deep);
+    border-top: 2px solid rgba(255,255,255,0.08);
+    padding: 7px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .footer-org {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .footer-org span { color: var(--red); }
+
+  .footer-contact {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.3px;
+  }
+
+  .footer-contact a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+  }
+
+  .footer-ein {
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── PRINT ──────────────────────────────────────────────── */
+  @media print {
+    body { background: none; padding: 0; margin: 0; }
+    .page { width: 100%; height: 100%; box-shadow: none; }
+    @page { size: letter portrait; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADLINE -->
+  <div class="hero-headline">
+    <span class="line1">BUILD THE</span>
+    <span class="line2">FUTURE</span>
+    <span class="tagline">Prairie Robotics Alliance &bull; Sun Prairie, Wisconsin &bull; Est. 2024</span>
+  </div>
+
+  <!-- THREE COLUMNS -->
+  <div class="body-columns">
+
+    <!-- LEFT: photo + about -->
+    <div class="col-left">
+
+      <div class="team-photo-card">
+        <img src="pictures/mukwonago-group1-w-mentors.jpg" alt="FRC Team 10522 at Mukwonago Regional">
+        <div class="team-photo-label">
+          <div class="team-num">Team 10522 &bull; 2026 Season</div>
+          <div class="team-desc">Mukwonago Regional &bull; Students &amp; Mentors</div>
+        </div>
+      </div>
+
+      <div class="about-block">
+        <div class="section-label">About the Alliance</div>
+        <p><strong>Prairie Robotics Alliance, Inc.</strong> is dedicated to advancing STEM education through FIRST&reg; Robotics programs and community partnerships in the Sun Prairie area.</p>
+        <p>Hands-on learning changes lives. By supporting student teams and community-facing STEM infrastructure, we open pathways into engineering, programming, and leadership &mdash; skills that translate directly into careers and impact.</p>
+
+        <div class="pipeline-box">
+          <p>We are building a <strong>multi-program pipeline</strong> from elementary school through high school graduation &mdash; and a community fab lab that will serve students and makers across eastern Dane County.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CENTER: three pillars -->
+    <div class="col-center">
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Community Impact</div>
+        </div>
+        <div class="pillar-body">
+          <p class="pillar-lead">The real scoreboard is students serving their community &mdash; STEM partnerships with local schools, public demos, library events, and service projects that put student-built skills to work for neighbors who need them.</p>
+          <div class="pillar-tags">
+            <span class="tag">Outreach</span>
+            <span class="tag">Service</span>
+            <span class="tag">Education</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Team Expansion</div>
+        </div>
+        <div class="pillar-body">
+          <p class="pillar-lead"><strong>Two new FIRST&reg; LEGO League teams</strong> for the 2026&ndash;27 season, plus a <strong>second FRC team</strong> for newer high school members &mdash; so no student has to wait until 9th grade to start building.</p>
+          <div class="pillar-tags">
+            <span class="tag red">FLL Explore</span>
+            <span class="tag red">FLL Challenge</span>
+            <span class="tag red">FTC</span>
+            <span class="tag red">FRC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Fabrication Lab</div>
+        </div>
+        <div class="pillar-body">
+          <p class="pillar-lead">An open-access prototyping space where students across all PRA programs can design, build, and iterate on real projects &mdash; with a documented safety program and Adult Safety Leads on site.</p>
+          <div class="pillar-tags">
+            <span class="tag gold">CNC</span>
+            <span class="tag gold">3D Print</span>
+            <span class="tag gold">Metal Fab</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: booster sidebar -->
+    <div class="col-right">
+
+      <div class="sidebar-eyebrow">Booster Club</div>
+      <div class="sidebar-title">How You<br>Can Help</div>
+
+      <div class="sidebar-divider"></div>
+
+      <div>
+        <div class="sidebar-section-num">01</div>
+        <div class="sidebar-section-heading">Volunteer Time</div>
+
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Mentor a Team</div>
+          <div class="sidebar-item-sub">Engineering &middot; Software &middot; Business &middot; Trades</div>
+        </div>
+
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Volunteer at Events</div>
+          <div class="sidebar-item-sub">Competitions &middot; Outreach &middot; Demos</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div>
+        <div class="sidebar-section-num">02</div>
+        <div class="sidebar-section-heading">Donate</div>
+
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Money</div>
+          <div class="sidebar-item-sub">Tax-Deductible &middot; Any Amount Helps</div>
+        </div>
+
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Goods</div>
+          <div class="sidebar-item-sub">Tools &middot; Materials &middot; Electronics &middot; PPE</div>
+        </div>
+
+        <div class="sidebar-item">
+          <div class="sidebar-item-label">Partnerships</div>
+          <div class="sidebar-item-sub">Corporate Sponsorship &middot; In-Kind Support</div>
+        </div>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="qr-block">
+        <img src="pictures/build-the-future-qr.png" alt="QR code — Donate to Build the Future">
+        <div class="qr-title">Scan to<br>Get Involved</div>
+        <div class="qr-sub">Donate to Build the Future,<br>sign up to volunteer, or<br>reach out about mentoring.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-strip">
+    <div class="footer-org">Prairie <span>Robotics</span> Alliance, Inc.</div>
+    <div class="footer-contact">
+      <a href="mailto:info@sprobotics.org">info@sprobotics.org</a>
+      &bull; prairierobotics.org &bull; Sun Prairie, WI
+    </div>
+    <div class="footer-ein">501(c)(3) &bull; EIN 41-3922915</div>
+  </div>
+
+</div>
+
+</body>
+</html>
