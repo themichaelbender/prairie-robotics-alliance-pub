@@ -2755,7 +2755,19 @@
 </footer>
 
 <script>
-  function switchTab(tabName) {
+  // Map every section id to the tab it lives in
+  var sectionTab = {
+    'public-documents': 'about',
+    'tab-home': 'home',
+    'tab-about': 'about',
+    'tab-events': 'events',
+    'tab-vision': 'vision',
+    'tab-support': 'support',
+    'tab-partners': 'partners',
+    'tab-sponsor-levels': 'sponsor-levels'
+  };
+
+  function switchTab(tabName, anchor) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tabName).classList.add('active');
@@ -2767,8 +2779,27 @@
     var trigger = document.querySelector('.nav-dropdown-trigger');
     if (supportDropdownTabs.includes(tabName)) trigger.classList.add('active');
     else trigger.classList.remove('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (anchor) {
+      history.replaceState(null, '', '#' + anchor);
+      var el = document.getElementById(anchor);
+      if (el) { setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); }
+    } else {
+      history.replaceState(null, '', '#' + tabName);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
+
+  function initFromHash() {
+    var hash = location.hash.replace('#', '');
+    if (!hash) return;
+    var tab = sectionTab[hash] || (document.getElementById('tab-' + hash) ? hash : null);
+    if (!tab) return;
+    var isSection = sectionTab[hash] && hash !== 'tab-' + sectionTab[hash];
+    switchTab(tab, isSection ? hash : null);
+  }
+
+  window.addEventListener('load', initFromHash);
 </script>
 
 </body>
