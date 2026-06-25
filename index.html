@@ -746,6 +746,74 @@
   .footer-transparency a { color: rgba(255,255,255,0.82); text-decoration: underline; }
   .footer-transparency a:hover { color: var(--white); }
 
+  /* FOOD DRIVE THERMOMETER */
+  .food-drive-tracker {
+    padding: 24px 40px;
+    border-bottom: 1px solid #E8EAED;
+    background: rgba(0,43,92,0.02);
+  }
+  .tracker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .tracker-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .tracker-total {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .tracker-total span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mid-gray);
+    margin-left: 4px;
+  }
+  .thermometer-wrap {
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .thermometer-track {
+    position: relative;
+    height: 28px;
+    background: #E8EAED;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .thermometer-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red) 0%, #c0392b 100%);
+    border-radius: 14px;
+    transition: width 0.6s ease;
+    min-width: 28px;
+  }
+  .thermometer-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0 0;
+  }
+  .thermometer-ticks span {
+    font-size: 10px;
+    color: var(--mid-gray);
+    text-align: center;
+    flex: 1;
+  }
+  .thermometer-ticks span:first-child { text-align: left; }
+  .thermometer-ticks span:last-child { text-align: right; }
+  @media (max-width: 640px) {
+    .food-drive-tracker { padding: 20px 24px; }
+    .thermometer-ticks span:nth-child(even) { visibility: hidden; }
+  }
+
   /* EVENTS */
   .event-card {
     background: var(--white);
@@ -2001,9 +2069,9 @@
 
   <div class="event-callout">
     <div class="event-callout-inner">
-      <div class="event-callout-label">Upcoming Event</div>
-      <div class="event-callout-title">Robotics Open House &mdash; May 13<sup>th</sup></div>
-      <div class="event-callout-detail">5:00 &ndash; 8:00 PM &bull; Prairie Phoenix Academy, Sun Prairie</div>
+      <div class="event-callout-label">Community Event</div>
+      <div class="event-callout-title">S.O.S. Food Drive &mdash; Benefiting <em>Sunshine Place</em></div>
+      <div class="event-callout-detail">Now through July 9<sup>th</sup> &bull; Drop-off at 1213 Celebration Blvd, Sun Prairie</div>
       <a class="btn btn-red" href="#" onclick="switchTab('events'); return false;">See Event Details</a>
     </div>
   </div>
@@ -2165,6 +2233,66 @@
       <div class="section-divider"></div>
       <h2>Upcoming Events</h2>
       <p>Come meet the team, see the robot, and learn what FIRST Robotics is all about.</p>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card-header">
+        <div class="event-type-badge">Community Event</div>
+        <div class="event-title">S.O.S. Food Drive &mdash; <em>Sunshine Place</em></div>
+        <div class="event-datetime">Now &ndash; July 9, 2026</div>
+        <div class="event-location">Drop-off at 1213 Celebration Blvd &mdash; Sun Prairie, WI</div>
+      </div>
+
+      <div class="event-card-description">
+        <p>Prairie Robotics Alliance is collecting non-perishable food and personal care items for the <strong><a href="https://sunshineplace.org/food-pantry/sos-food-fight-pantry-drive/" target="_blank" rel="noopener">S.O.S. Food Fight Pantry Drive</a></strong>, benefiting <strong>Sunshine Place</strong> in Sun Prairie. Sunshine Place is a Pantry of Choice &mdash; community members get to pick their own items &mdash; so a variety of goods makes a real difference. All donations also support Milwaukee Tool&rsquo;s competition team. The business that collects the most pounds per employee wins &mdash; help us crush it!</p>
+        <p class="event-card-invite">Friends, Family, and Neighbors are All Welcome to Contribute!</p>
+      </div>
+
+      <!-- FOOD DRIVE TRACKER — update data-collected to change the fill -->
+      <div class="food-drive-tracker" id="food-drive-tracker" data-collected="10" data-goal="500">
+        <div class="tracker-header">
+          <div class="tracker-label">Pounds Collected</div>
+          <div class="tracker-total">10 <span>lbs of 500 lb goal</span></div>
+        </div>
+        <div class="thermometer-wrap">
+          <div class="thermometer-track">
+            <div class="thermometer-fill" style="width:2%"></div>
+          </div>
+        </div>
+        <div class="thermometer-ticks">
+          <span>0</span><span>50</span><span>100</span><span>150</span><span>200</span>
+          <span>250</span><span>300</span><span>350</span><span>400</span><span>450</span><span>500</span>
+        </div>
+      </div>
+
+      <div class="event-card-body">
+        <div class="event-details">
+          <h4>Most Needed Items</h4>
+          <ul class="event-activity-list">
+            <li>Canned goods, pasta, rice, cereal</li>
+            <li>Peanut butter</li>
+            <li>Soap &amp; shampoo</li>
+            <li>Deodorant &amp; feminine products</li>
+            <li><a href="https://sunshineplace.org/wp-content/uploads/2026/05/Social-Media-Sun-Prairie-Food-Pantry-Top-Needs.pdf" target="_blank" rel="noopener">Name-brand bulk items (Costco recommended)</a></li>
+          </ul>
+        </div>
+        <div class="event-details" style="border-right:none;">
+          <h4>How to Donate</h4>
+          <ul class="event-activity-list">
+            <li>Drop off at 1213 Celebration Blvd (black bin on porch)</li>
+            <li>Text or call Michael: 608-692-6035 for pickup</li>
+            <li>Grab a beverage on us at Jinx Coffee &mdash; Thu Jun 2, 1&ndash;3 PM</li>
+            <li>Donate money online</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="event-card-footer">
+        <div class="event-address">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Delivered to Milwaukee Tool before July 9, 2025
+        </div>
+      </div>
     </div>
 
     <div class="event-card">
